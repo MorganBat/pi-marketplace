@@ -66,3 +66,6 @@ gem 'devise'
 
 # Faker for db seeding
 gem 'faker'
+
+# AWS for image hosting
+gem 'aws-sdk'
