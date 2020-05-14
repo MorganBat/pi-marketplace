@@ -17,12 +17,12 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new
-    @models = ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
+    @models = ["4B", "3B+", "3A+", "3", "2", "B", "A+", "Zero WH", "Zero W", "Zero"]
   end
 
   # GET /listings/1/edit
   def edit
-    @models = ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
+    @models = ["4B", "3B+", "3A+", "3", "2", "B", "A+", "Zero WH", "Zero W", "Zero"]
   end
 
   # POST /listings

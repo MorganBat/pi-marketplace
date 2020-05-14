@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name,
+        :required => 'required' %>
   </div>
 
   <div class="field">
@@ -24,17 +25,21 @@
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.number_field :price, value: @listing.price ? '%.2f' % @listing.price : nil, min: 0, step: 0.01 %>
+    <%= form.number_field :price,
+        value: @listing.price ? '%.2f' % @listing.price : nil, min: 0, step: 0.01,
+        :required => 'required' %>
   </div>
 
   <div class="field">
     <%= form.label :software %>
-    <%= form.text_area :software %>
+    <%= form.text_area :software,
+        :required => 'required' %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description,
+        :required => 'required' %>
   </div>
 
   <div class="actions">
