@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
-  
+  before_action :set_listing, only: %i[show edit update destroy]
   # ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
 
   # GET /listings
@@ -28,7 +28,7 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = current_user.listings.create(listing_params)
+    @listing = Listing.create(listing_params)
 
     respond_to do |format|
       if @listing.save
@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
   # DELETE /listings/1
   # DELETE /listings/1.json
   def destroy
-    @listing.destroy if @listing.user_id == current_user.id
+    @listing.destroy # if @listing.user_id == current_user.id
     respond_to do |format|
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
