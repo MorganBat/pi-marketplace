@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   
   # ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
 
@@ -17,12 +17,12 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new
-    @models = ["4B", "3B+", "3A+", "3", "2", "B", "A+", "Zero WH", "Zero W", "Zero"]
+    set_models
   end
 
   # GET /listings/1/edit
   def edit
-    @models = ["4B", "3B+", "3A+", "3", "2", "B", "A+", "Zero WH", "Zero W", "Zero"]
+    set_models
   end
 
   # POST /listings
@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
   # DELETE /listings/1
   # DELETE /listings/1.json
   def destroy
-    @listing.destroy
+    @listing.destroy if @listing.user_id == current_user.id
     respond_to do |format|
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
@@ -74,5 +74,9 @@ class ListingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def listing_params
       params.require(:listing).permit(:name, :model, :price, :software, :description)
+    end
+
+    def set_models
+      @models = ["4B", "3B+", "3A+", "3", "2", "B", "A+", "Zero WH", "Zero W", "Zero"]
     end
 end
