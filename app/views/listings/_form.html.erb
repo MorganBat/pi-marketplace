@@ -18,12 +18,13 @@
 
   <div class="field">
     <%= form.label :model %>
-    <%= form.text_field :model %>
+    <%= form.select :model,
+        options_for_select(@models) %>
   </div>
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.number_field :price, value: @listing.price ? '%.2f' % @listing.price : nil, min: 0, step: 0.01 %>
   </div>
 
   <div class="field">

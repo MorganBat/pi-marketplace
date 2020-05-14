@@ -1,5 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  
+  # ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
 
   # GET /listings
   # GET /listings.json
@@ -15,10 +17,12 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new
+    @models = ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
   end
 
   # GET /listings/1/edit
   def edit
+    @models = ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
   end
 
   # POST /listings
@@ -41,7 +45,7 @@ class ListingsController < ApplicationController
   # PATCH/PUT /listings/1.json
   def update
     respond_to do |format|
-      if @listing.update(listing_params)
+      if current_user.listings.update(listing_params)
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
       else
