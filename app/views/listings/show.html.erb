@@ -22,6 +22,10 @@
   <strong>Description:</strong>
   <%= @listing.description %>
 </p>
+<p>
+  <strong>Seller:</strong>
+  <%= @seller.email %>
+</p>
 
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <%= link_to 'Back', listings_path %>

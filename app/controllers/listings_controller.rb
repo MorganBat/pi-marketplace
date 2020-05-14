@@ -12,6 +12,7 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @seller = User.find_by_id(@listing.user_id)
   end
 
   # GET /listings/new
