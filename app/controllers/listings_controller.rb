@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :set_user_listing, only: %i[edit update destroy]
   before_action :set_listing, only: %i[show edit update destroy]
-  # ["4B", "3A+", "3B+", "Zero WH" "Zero W" "A+", "3", "Zero", "2", "B"]
 
   # GET /listings
   # GET /listings.json
@@ -16,7 +16,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
-    @listing = Listing.new
+    @listing = current_user.listings.new
     set_models
   end
 
@@ -28,7 +28,7 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.create(listing_params)
+    @listing = current_user.listings.new(listing_params)
 
     respond_to do |format|
       if @listing.save
@@ -69,6 +69,10 @@ class ListingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
       @listing = Listing.find(params[:id])
+    end
+
+    def set_user_listing
+      @listing = current_user.listings.find_by_id(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
