@@ -41,6 +41,8 @@
     <%= form.text_area :description,
         :required => 'required' %>
   </div>
+  
+  <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token" />
 
   <div class="actions">
     <%= form.submit %>
