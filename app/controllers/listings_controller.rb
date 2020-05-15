@@ -2,11 +2,13 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_user_listing, only: %i[edit update destroy]
   before_action :set_listing, only: %i[show edit update destroy]
+  before_action :set_models, only: %i[new edit]
 
   # GET /listings
   # GET /listings.json
   def index
     @listings = Listing.all
+    @sellers = User.all
   end
 
   # GET /listings/1
@@ -18,12 +20,10 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = current_user.listings.new
-    set_models
   end
 
   # GET /listings/1/edit
   def edit
-    set_models
   end
 
   # POST /listings
