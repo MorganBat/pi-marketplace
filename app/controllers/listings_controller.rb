@@ -24,6 +24,9 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    if user_signed_in? && current_user.id != @listing.user_id
+      redirect_to listings_path
+    end
   end
 
   # POST /listings
