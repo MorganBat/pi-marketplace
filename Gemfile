@@ -69,6 +69,3 @@ gem 'faker'
 
 # AWS for image hosting
 gem 'aws-sdk'
-
-# NodeJS
-gem 'nodejs-rails'
