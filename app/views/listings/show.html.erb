@@ -34,6 +34,7 @@
   <% end %>
 </p>
 
+<% if user_signed_in? && current_user.id != @listing.user_id %>
 <p>
 <button data-stripe='payment' class = 'btn btn-danger'>Buy this pi!</button>
 </p>
@@ -53,8 +54,9 @@
       });
     });
 </script>
+<% end %>
 
 <% if user_signed_in? && current_user.id == @listing.user_id %>
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Edit Listing', edit_listing_path(@listing), :class => 'btn btn-info' %> |
 <% end %>
-<%= link_to 'Back', listings_path %>
+<%= link_to 'Back to Index', listings_path, :class => 'btn btn-primary' %>
