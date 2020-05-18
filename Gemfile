@@ -69,3 +69,6 @@ gem 'faker'
 
 # AWS for image hosting
 gem 'aws-sdk'
+
+# Stripe for payments
+gem 'stripe'

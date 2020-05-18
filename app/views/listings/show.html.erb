@@ -34,6 +34,26 @@
   <% end %>
 </p>
 
+<p>
+<button data-stripe='payment' class = 'btn btn-danger'>Buy this pi!</button>
+</p>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
+
 <% if user_signed_in? && current_user.id == @listing.user_id %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <% end %>
