@@ -41,6 +41,9 @@
     <%= form.text_area :description,
         :required => 'required' %>
   </div>
+
+  <%= form.label "Photo:" %>
+  <%= form.file_field :image %>
   
   <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token" />
 

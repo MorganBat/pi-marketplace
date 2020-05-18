@@ -26,6 +26,13 @@
   <strong>Seller:</strong>
   <%= @seller.email %>
 </p>
+<p>
+  <% if @listing.image.attached? %>
+    <image src = "<%=url_for(@listing.image)%>">
+  <% else %>
+    No image attached
+  <% end %>
+</p>
 
 <% if user_signed_in? && current_user.id == @listing.user_id %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
