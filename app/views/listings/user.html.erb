@@ -1,6 +1,7 @@
-User Listings
+<h2>User Listings</h2>
 <br />
 <% @listings.each do |listing| %>
+<p>
     <%= listing.name %>
     <%= listing.model %>
     <%= listing.price %>
@@ -13,6 +14,7 @@ User Listings
     <%= link_to 'Show', listing %>
     <%= link_to 'Edit', edit_listing_path(listing) %>
     <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
 <% end %>
 
 <%= link_to 'Back to Index', listings_path, :class => 'btn btn-primary' %>
