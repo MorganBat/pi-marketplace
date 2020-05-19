@@ -9,7 +9,7 @@
 puts "Generating Users"
 
 User.create(name:Faker::Name.name, email:"test@email.xyz", location:Faker::Address.city, password: "test123")
-User.create(name:Faker::Name.name, email:"asd@asd.com", location:Faker::Address.city, password: "test123")
+User.create(name:Faker::Name.name, email:"asd@asd.com", location:Faker::Address.city, password: "asdasd")
 
 puts "Generating Listings"
 
