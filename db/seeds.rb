@@ -6,13 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Generating Users"
+
+User.create(name:Faker::Name.name, email:"test@email.xyz", location:Faker::Address.city, password: "test123")
+User.create(name:Faker::Name.name, email:"asd@asd.com", location:Faker::Address.city, password: "test123")
+
+puts "Generating Listings"
+
+Listing.create(name:"Raspberry Pi", model:"4B", price:59.99, software: "Ubuntu", description: "New", sold:false)
 
 10.times do
-    puts "generating User"
-    User.create(name:Faker::Name.name, email:Faker::Internet.email, location:Faker::Address.city)
+    Listing.create(name:"Raspberry pi", model:"4B", price:59.99, software:"Raspbian", description:Faker::Lorem.sentence, user_id:(rand(2)+1),sold:false)
 end
 
-20.times do
-    puts "generating Listing"
-    Listing.create(name:"Raspberry pi", model:Faker::Number.non_zero_digit, price:Faker::Number.decimal(l_digits: 2), software:"Raspbian", description:Faker::Lorem.sentence)
-end
+puts "Database seeding complete"
