@@ -1,0 +1,18 @@
+User Listings
+<br />
+<% @listings.each do |listing| %>
+    <%= listing.name %>
+    <%= listing.model %>
+    <%= listing.price %>
+    <%= listing.software %>
+    <% if listing.sold? %>
+        Sold
+    <% else %>
+        Not Sold
+    <% end %>
+    <%= link_to 'Show', listing %>
+    <%= link_to 'Edit', edit_listing_path(listing) %>
+    <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= link_to 'Back to Index', listings_path, :class => 'btn btn-primary' %>

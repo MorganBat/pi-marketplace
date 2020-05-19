@@ -92,6 +92,10 @@ class ListingsController < ApplicationController
     end
   end
 
+  def user
+    @listings = current_user.listings
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
