@@ -71,11 +71,13 @@ If the user is on a listing page that was not created by them, they have the opt
 
 ### R15 - Explain the different high-level components (abstractions) in your app
 
-Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. 
+Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. Pi Marketplace also utilises a relational database for long term storage of data.
 
-**Model:** The model handles the interface with the Database for the purpose of storing long term data. In this application I used a PostgreSQL database.
+**Database:** The Database (PostgreSQL is used in this instance) is used for the long term storage of data, allowing the data to persist between sessions.
 
-**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app.
+**Model:** The model handles the interface with the Database. 
+
+**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user, 
 
 **View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller.
 
