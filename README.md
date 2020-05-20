@@ -25,7 +25,9 @@ The purpose of this website is to facilitate the trade of second hand Raspberry 
 
 #### Functionality/Features:
 **Accounts:**
-The first step to use the website is to register a user account. Pi Marketplace doesn't differentiate between Buyer and Seller accounts, the same account is used for both. Once an account is registered and verified then the user can list a Raspberry for Sale, or purchase a Raspberry Pi listed on the site. 
+The first step to use the website is to register a user account. Pi Marketplace doesn't differentiate between Buyer and Seller accounts, the same account is used for both. Once an account is registered and verified then the user can list a Raspberry pi for Sale, or purchase a Raspberry Pi listed on the site. 
+
+Accounts are handled by the ```devise``` gem.
 
 **Listings:**
 The main page of the website lists all of the Raspberry Pis currently for sale. From here a user can create a new listing, edit or delete their own listings, or go through to view more information about any listing.
