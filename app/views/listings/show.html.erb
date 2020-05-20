@@ -28,7 +28,7 @@
 </p>
 <p>
   <% if @listing.image.attached? %>
-    <image src = "<%=url_for(@listing.image)%>">
+    <image src = "<%=url_for(@listing.image)%>" width = "400">
   <% else %>
     No image attached
   <% end %>
