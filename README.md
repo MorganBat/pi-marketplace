@@ -25,10 +25,15 @@ The purpose of this website is to facilitate the trade of second hand Raspberry 
 
 #### Functionality/Features:
 **Accounts:**
+The first step to use the website is to register a user account. Pi Marketplace doesn't differentiate between Buyer and Seller accounts, the same account is used for both. Once an account is registered and verified then the user can list a Raspberry for Sale, or purchase a Raspberry Pi listed on the site. 
 
 **Listings:**
+The main page of the website lists all of the Raspberry Pis currently for sale. From here a user can create a new listing, edit or delete their own listings, or go through to view more information about any listing.
+
+When the user clicks through to access more information (including a photo) they will have the option to purchase the Raspberry pi, wuth payment being handled by Stripe.
 
 **Stripe Integration:**
+If the user is on a listing page that was not created by them, they have the option to purchase the Raspberry pi. Payments are handled by Stripe, and upon successful completion of the transaction that are returned back to the website.
 
 #### Sitemap
 
@@ -68,11 +73,13 @@ The purpose of this website is to facilitate the trade of second hand Raspberry 
 
 Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. 
 
-Model: The model handles the interface with the Database for the purpose of storing long term data. In this application I used a PostgreSQL database.
+**Model:** The model handles the interface with the Database for the purpose of storing long term data. In this application I used a PostgreSQL database.
 
-Controller: The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app.
+**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app.
 
-View: The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller.
+**View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller.
+
+
 
 ### R16 - Detail any third party services that your app will use
 
