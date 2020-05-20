@@ -81,6 +81,14 @@ The main target audience is Electronics Hobbyists. This website is not designed 
 
 ### R13 - Wireframes
 
+![](wf1.png)
+![](wf2.png)
+![](wf3.png)
+![](wf4.png)
+![](wf5.png)
+![](wf6.png)
+![](wf7.png)
+
 ### R14 - Entity Relationship Diagram
 
 ![Entity Relationship Diagram](pi-marketplace-erd.png)
