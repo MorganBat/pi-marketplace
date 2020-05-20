@@ -40,6 +40,7 @@ If the user is on a listing page that was not created by them, they have the opt
 #### Screenshots
 
 #### Target Audience
+The main target audience is Electronics Hobbyists. This website is not designed solely for selling secondhand hardware, but also selling hardware with different preinstalled software.
 
 #### Tech Stack
 
@@ -77,7 +78,7 @@ Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Mod
 
 **Model:** The model handles the interface with the Database. 
 
-**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user, 
+**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user
 
 **View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller.
 
