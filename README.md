@@ -105,9 +105,30 @@ Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Mod
 **Ultrahook:** Ultrahook is a web based Webhook platform. In this application it is used for testing Stripe's payment webhook. Ultrahook is designed to forward webhook requests, which is very useful when running the application on a local computer for testing.
 
 ### R17 - Describe your projects models in terms of the relationships (active record associations) they have with each other
+```ruby
+class User < ApplicationRecord
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  has_many :listings, dependent: :destroy
+end
+```
+
+```ruby
+class Listing < ApplicationRecord
+    belongs_to :user
+
+    has_one_attached :image
+end
+```
 
 ### R18 - Discuss the database relations to be implemented in your application
+
+# ERD IMAGE GOES HERE
+
+- A user ```has_many``` listings, with a ```dependent: :destroy``` relationship
+- A listing ```belongs_to``` a user
+
+A user can have zero listings, one listing or many listings. A listing can only belong to one user, and through the ```dependent: :destroy``` relationship if a user is deleted, the associated listings are deleted too. This prevents orphaned records in the database. The Foreign keys column is used to link the listings and users to each other.
 
 ### R19 - Provide your database schema design
 
