@@ -33,12 +33,13 @@ Payments are handled by the ```stripe``` gem.
 **Listings:**
 The main page of the website lists all of the Raspberry Pis currently for sale. From here a user can create a new listing, edit or delete their own listings, or go through to view more information about any listing.
 
-When the user clicks through to access more information (including a photo) they will have the option to purchase the Raspberry pi, wuth payment being handled by Stripe.
+When the user clicks through to access more information (including a photo) they will have the option to purchase the Raspberry pi, with payment being handled by Stripe.
 
 **Stripe Integration:**
 If the user is on a listing page that was not created by them, they have the option to purchase the Raspberry pi. Payments are handled by Stripe, and upon successful completion of the transaction that are returned back to the website.
 
 #### Sitemap
+![Site Map](pi-marketplace-site-map.png)
 
 #### Screenshots
 
