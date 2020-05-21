@@ -242,4 +242,4 @@ Project Management was conducted via a Trello Board.
 ![](trello4.png)
 ![](trello5.png)
 
-Version control was conducted via [GitHub](https://github.com/MorganBat/pi-marketplace)
+Version control was conducted via [GitHub.](https://github.com/MorganBat/pi-marketplace)
