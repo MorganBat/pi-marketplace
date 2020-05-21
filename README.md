@@ -50,6 +50,7 @@ If the user is on a listing page that was not created by them, they have the opt
 ![](ss5.png)
 ![](ss6.png)
 ![](ss7.png)
+![](ss8.png)
 
 #### Target Audience
 The main target audience is Electronics Hobbyists. This website is not designed solely for selling secondhand hardware, but also selling hardware with different preinstalled software.
