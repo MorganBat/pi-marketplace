@@ -97,7 +97,7 @@ Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Mod
 
 **View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller. The view also handles user inputs, such as user registration and login, or applying any CRUD (Create, Read, Update and Destroy) operation to a listing.
 
-**Routes:** The routes establishes which controller and function is used when a HTTP request is made for the website. The routes are arranged in accordance with the RESTful architecture
+**Routes:** The routes establishes which controller and function is used when a HTTP request is made to the website. The routes are arranged in accordance with the RESTful architecture, to handle multiple HTTP verbs such as GET, PUT, PATCH, POST and DELETE.
 Routes are declared in the ```config/routes.rb``` file.
 
 ### R16 - Detail any third party services that your app will use
