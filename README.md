@@ -233,3 +233,13 @@ Additionally a User may upload an image to associate with a listing. The Active 
 ```
 
 ### R20 - Describe the way tasks are allocated and tracked in your project
+
+Project Management was conducted via a Trello Board.
+
+![](trello1.png)
+![](trello2.png)
+![](trello3.png)
+![](trello4.png)
+![](trello5.png)
+
+Version control was conducted via [GitHub](https://github.com/MorganBat/pi-marketplace)
