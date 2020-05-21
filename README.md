@@ -8,15 +8,15 @@ Github repo - https://github.com/MorganBat/pi-marketplace
 
 ### R7 - Identification of the problem you are trying to solve by building this particular marketplace app.
 
-Raspberry Pis are an incredibly popular micro computer used for a wide array of projects. There is a variety of models available with different hardware configurations and capabilities. Additionally, a wide variety of software can be installed.
+Raspberry Pis are an incredibly popular micro computer used for a wide array of projects. There is a variety of models available with different hardware configurations and capabilities. Additionally, a wide variety of software can be installed and configured as required by the end user.
 
 ### R8 - Why is it a problem that needs solving?
 
 There are two main problems being solved here:
 
-1. People may have Raspberry Pis they are no longer using, so they may wish to sell them. At the other end is people who are happy to buy a second hand raspberry pi, especially if an older model has a certain plug (HDMI, micro-usb etc.) which has been phased out of the newer models.
+1. People may have Raspberry Pis they are no longer using, so they may wish to sell them. At the other end is people who are happy to buy a second hand Raspberry Pi, especially if an older model has a certain plug (HDMI, micro-usb etc.) which has been phased out of the newer models.
 
-2. Some software can be quite difficult to setup. Some users may not have the knowledge required to install and setup a certain package, or may be time poor and willing to pay for a raspberry pi with pre installed software.
+2. Some software can be quite difficult to setup. Some users may not have the knowledge required to install and setup a certain package, or may be time poor and willing to pay for a Raspberry pi with pre installed and configured software.
 
 ### R11 - Description of your marketplace app
 
@@ -95,17 +95,17 @@ The main target audience is Electronics Hobbyists. This website is not designed 
 
 ### R15 - Explain the different high-level components (abstractions) in your app
 
-Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. Pi Marketplace also utilises a relational database for long term storage of data.
+Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. Pi Marketplace also utilises a relational database for long term storage of data, as the data needs to persist between user sessions.
 
 **Database:** The Database (PostgreSQL is used for Pi Marketplace) is used for the long term storage of data, allowing the data to persist between sessions. Relationships between the different tables contained in the databse are set by the Model.
 
 **Model:** The model handles the interface with the Database. It also organises the relationships between the various database tables, such as linking the listing to the user account that created it. Also deletes all a user's listings if a user account is deleted, through setting ```dependent: :destroy```.
 
-**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user.
+**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is also used to authenticate the user.
 
 **View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller. The view also handles user inputs, such as user registration and login, or applying any CRUD (Create, Read, Update and Destroy) operation to a listing.
 
-**Routes:** The routes establishes which controller and function is used when a HTTP request is made to the website. The routes are arranged in accordance with the RESTful architecture, to handle multiple HTTP verbs such as GET, PUT, PATCH, POST and DELETE.
+**Routes:** The routes establishes which controller and function is used when a HTTP request is made to the website. The routes also specifies which view to display when a HTTP GET request is made. The routes are arranged in accordance with the RESTful architecture, to handle multiple HTTP verbs such as GET, PUT, PATCH, POST and DELETE.
 Routes are declared in the ```config/routes.rb``` file.
 
 ### R16 - Detail any third party services that your app will use
@@ -135,6 +135,8 @@ class User < ApplicationRecord
 end
 ```
 
+The User model ```has_many``` listings, with a ```dependent: :destroy```  relationship. This is so a user can list more than one Raspberry Pi for sale at once, though the User can also have 1 or 0 listings. The dependent destroy relationship is to avoid orphaned records in the Database. If a User is to delete their account, then all associated listings will also be deleted.
+
 ```ruby
 class Listing < ApplicationRecord
     belongs_to :user
@@ -142,6 +144,8 @@ class Listing < ApplicationRecord
     has_one_attached :image
 end
 ```
+
+The Listing model ```belongs_to``` the User model. This is because a User creates a listing when they have a Raspberry Pi to sell. The ```has_one_attached :image``` relationship is so the User can upload a photo of their Raspberry Pi, and it will be stored in Active Storage - in this application AWS S3 is used to host user-uploaded images.
 
 ### R18 - Discuss the database relations to be implemented in your application
 
@@ -151,6 +155,8 @@ end
 - A listing ```belongs_to``` a user
 
 A user can have zero listings, one listing or many listings. A listing can only belong to one user, and through the ```dependent: :destroy``` relationship if a user is deleted, the associated listings are deleted too. This prevents orphaned records in the database. The Foreign keys column is used to link the listings and users to each other.
+
+Additionally a User may upload an image to associate with a listing.
 
 ### R19 - Provide your database schema design
 
