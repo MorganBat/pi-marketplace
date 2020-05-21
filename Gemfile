@@ -72,3 +72,6 @@ gem 'aws-sdk'
 
 # Stripe for payments
 gem 'stripe'
+
+# Ransack for listing sorting
+gem 'ransack'

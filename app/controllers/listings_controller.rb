@@ -7,8 +7,10 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
     @sellers = User.all
+    @search = Listing.ransack(params[:q])
+    @listings = @search.result
+    @search.build_condition
   end
 
   # GET /listings/1

@@ -3,11 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Price</th>
-      <th>Software</th>
-      <th>Description</th>
+      <th><%= sort_link @search, :name, "Name" %></th>
+      <th><%= sort_link @search, :type, "Type" %></th>
+      <th><%= sort_link @search, :price, "Price" %></th>
+      <th><%= sort_link @search, :software, "Software" %></th>
+      <th><%= sort_link @search, :description, "Description" %></th>
       <th>Sold by:</th>
       <th colspan="3"></th>
     </tr>
