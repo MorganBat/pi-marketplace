@@ -25,9 +25,10 @@ The purpose of this website is to facilitate the trade of second hand Raspberry 
 
 #### Functionality/Features:
 **Accounts:**
-The first step to use the website is to register a user account. Pi Marketplace doesn't differentiate between Buyer and Seller accounts, the same account is used for both. Once an account is registered and verified then the user can list a Raspberry pi for Sale, or purchase a Raspberry Pi listed on the site. 
+The first step to use the website is to register a user account. Pi Marketplace doesn't differentiate between Buyer and Seller accounts, the same account can be used for both. Once an account is registered and verified then the user can list a Raspberry pi for Sale, or purchase a Raspberry Pi listed on the site. 
 
 Accounts are handled by the ```devise``` gem.
+Payments are handled by the ```stripe``` gem.
 
 **Listings:**
 The main page of the website lists all of the Raspberry Pis currently for sale. From here a user can create a new listing, edit or delete their own listings, or go through to view more information about any listing.
@@ -50,7 +51,7 @@ The main target audience is Electronics Hobbyists. This website is not designed 
 
 **Back End:** Ruby, Ruby on Rails
 
-**Additional Gems:** Devise, Stripe, AWS S3, Ultrahook, Faker
+**Additional Gems:** Devise, Stripe, AWS S3, Ultrahook, Faker, Ransack
 
 **Database:** PostgreSQL
 
@@ -78,34 +79,102 @@ Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Mod
 
 **Database:** The Database (PostgreSQL is used in this instance) is used for the long term storage of data, allowing the data to persist between sessions.
 
-**Model:** The model handles the interface with the Database. 
+**Model:** The model handles the interface with the Database. It also organises the relationships between the various database tables, such as linking the listing to the user account that created it. Also deletes all a user's listings if a user account is deleted, through setting the ```dependent: :destroy```.
 
-**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user
+**Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user.
 
 **View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller.
 
 
-
 ### R16 - Detail any third party services that your app will use
 
-Heroku: Heroku is a cloud hosting provider designed specifically for the hosting of web apps. It allows a user to deploy their Rails app through a Command Line Interface which utilises Git commands to upload the source files.
+**Heroku:** Heroku is a cloud hosting provider designed specifically for the hosting of web apps. It allows a user to deploy their Rails app through a Command Line Interface which utilises Git commands to upload the source files.
 
-AWS S3: AWS (Amazon Web Services) S3 (Simple Storage Service) is a cloud hosting web platform. In this app I have used a S3 bucket to host user uploaded images. This uses the 'aws-s3' gem. Credentials are stored in ```config/credentials.ymc.enc``` which is decrypted by the master key stored in ```config/master.key```
+**AWS S3:** AWS (Amazon Web Services) S3 (Simple Storage Service) is a cloud hosting web platform. In this app I have used a S3 bucket to host user uploaded images. This uses the ```aws-s3``` gem. Credentials are stored in ```config/credentials.ymc.enc``` which is decrypted by the master key stored in ```config/master.key```
 
-Stripe: Stripe is an online payment processor. Uses the 'stripe' gem. Stripe completely handles credit card payments on their website. Stripe also offers a comprehensive dashboard that tracks payment statistics such as Gross Volume, New Customers, Spend per customer and many more. It also offers a RESTful API and a Webhook service for integrating receipt handling into your web app.
+**Stripe:** Stripe is an online payment processor. Uses the ```stripe``` gem. Stripe completely handles credit card payments on their website. Stripe also offers a comprehensive dashboard that tracks payment statistics such as Gross Volume, New Customers, Spend per customer and many more. It also offers a RESTful API and a Webhook service for integrating receipt handling into your web app.
 
-Devise: Devise is a user authentication platform built for Ruby on Rails. Uses the 'devise' gem. Devise handles users signing up for and logging into their profiles.
+**Devise:** Devise is a user authentication platform built for Ruby on Rails. Uses the ```devise``` gem. Devise handles users signing up for and logging into their profiles.
 
-Faker: Faker is a gem used to generate fake information. In this application it is used to seed the database with 'fake' data for testing purposes.
+**Ransack:** Ransack is a gem used for sorting the listings on the listing page. By clicking on the headers the user can sort various parameters in either ascending or descending order, such as Name, Model, Price, Software and Description.
 
-PostgreSQL: PostgreSQL is a relational database management system. In this application it is used for the long term storage of user data and their associated listings.
+**Faker:** Faker is a gem used to generate fake information. In this application it is used to seed the database with 'fake' data for testing purposes.
 
-Ultrahook: Ultrahook is a web based Webhook platform. In this application it is used for testing Stripe's payment webhook. Ultrahook is designed to forward webhook requests, which is very useful when running the application on a local computer for testing.
+**PostgreSQL:** PostgreSQL is a relational database management system. In this application it is used for the long term storage of user data and their associated listings.
+
+**Ultrahook:** Ultrahook is a web based Webhook platform. In this application it is used for testing Stripe's payment webhook. Ultrahook is designed to forward webhook requests, which is very useful when running the application on a local computer for testing.
 
 ### R17 - Describe your projects models in terms of the relationships (active record associations) they have with each other
+
 
 ### R18 - Discuss the database relations to be implemented in your application
 
 ### R19 - Provide your database schema design
+
+**Active Storage Attachments:**
+```ruby
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+```
+
+**Active Storage Blobs:**
+```ruby
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+```
+
+**Listings Table:**
+```ruby 
+  create_table "listings", force: :cascade do |t|
+    t.string "name"
+    t.string "model"
+    t.float "price"
+    t.text "software"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.boolean "sold"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+```
+
+**Users Table:**
+```ruby
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+```
+
+**Foreign Keys:**
+```ruby
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "listings", "users"
+```
 
 ### R20 - Describe the way tasks are allocated and tracked in your project
