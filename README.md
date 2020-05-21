@@ -73,6 +73,8 @@ The main target audience is Electronics Hobbyists. This website is not designed 
 
 ### R14 - Entity Relationship Diagram
 
+![Entity Relationship Diagram](pi-marketplace-erd.png)
+
 ### R15 - Explain the different high-level components (abstractions) in your app
 
 Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. Pi Marketplace also utilises a relational database for long term storage of data.
@@ -123,7 +125,7 @@ end
 
 ### R18 - Discuss the database relations to be implemented in your application
 
-# ERD IMAGE GOES HERE
+![Entity Relationship Diagram](pi-marketplace-erd.png)
 
 - A user ```has_many``` listings, with a ```dependent: :destroy``` relationship
 - A listing ```belongs_to``` a user
