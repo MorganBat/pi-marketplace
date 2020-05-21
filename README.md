@@ -89,14 +89,16 @@ The main target audience is Electronics Hobbyists. This website is not designed 
 
 Pi Marketplace is built on Ruby on Rails, a web framework which utilises the Model/View/Controller (MVC) architecture. Pi Marketplace also utilises a relational database for long term storage of data.
 
-**Database:** The Database (PostgreSQL is used in this instance) is used for the long term storage of data, allowing the data to persist between sessions.
+**Database:** The Database (PostgreSQL is used for Pi Marketplace) is used for the long term storage of data, allowing the data to persist between sessions. Relationships between the different tables contained in the databse are set by the Model.
 
-**Model:** The model handles the interface with the Database. It also organises the relationships between the various database tables, such as linking the listing to the user account that created it. Also deletes all a user's listings if a user account is deleted, through setting the ```dependent: :destroy```.
+**Model:** The model handles the interface with the Database. It also organises the relationships between the various database tables, such as linking the listing to the user account that created it. Also deletes all a user's listings if a user account is deleted, through setting ```dependent: :destroy```.
 
 **Controller:** The controller is the interface between the model and the view. The controller passes information between them as required, and contains the majority of the logic used in the app. The controller is used to authenticate the user.
 
-**View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller.
+**View:** The view is what's displayed to the end user. It uses HTML, CSS and Embedded Ruby to display information provided by the controller. The view also handles user inputs, such as user registration and login, or applying any CRUD (Create, Read, Update and Destroy) operation to a listing.
 
+**Routes:** The routes establishes which controller and function is used when a HTTP request is made for the website. The routes are arranged in accordance with the RESTful architecture
+Routes are declared in the ```config/routes.rb``` file.
 
 ### R16 - Detail any third party services that your app will use
 
