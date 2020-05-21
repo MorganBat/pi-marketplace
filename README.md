@@ -73,11 +73,15 @@ The main target audience is Electronics Hobbyists. This website is not designed 
 
 1. As a seller, I wish to be able to sell old Raspberry pis that I am no longer using.
 
-2. As a seller, I wish to be able to sell raspberry pis with different software installed as a value add.
+2. As a seller, I wish to be able to sell raspberry pis with different software installed as a value-add.
 
-3. As a buyer, I wish to be able to buy second hand Raspberry Pis as they will be cheaper.
+3. As a buyer, I wish to be able to buy second hand Raspberry Pis as they will be cheaper than Brand New.
 
-4. As a buyer, I may wish to purchase a Raspberry pi with pre installed software to save myself time or because I lack the technical skills to configure the pi.
+4. As a buyer, I wish to be able to buy older model Raspberry Pis as they may have different plug configurations which will save me buying additional cables or adaptors.
+
+4. As a buyer, I wish to purchase a Raspberry pi with pre installed software to save myself time or because I lack the technical skills to configure the pi.
+
+5. As a user, I wish to be able to both buy and sell with the same account.
 
 ### R13 - Wireframes
 
@@ -156,9 +160,11 @@ The Listing model ```belongs_to``` the User model. This is because a User create
 
 A user can have zero listings, one listing or many listings. A listing can only belong to one user, and through the ```dependent: :destroy``` relationship if a user is deleted, the associated listings are deleted too. This prevents orphaned records in the database. The Foreign keys column is used to link the listings and users to each other.
 
-Additionally a User may upload an image to associate with a listing.
+Additionally a User may upload an image to associate with a listing. The Active Storage model uses a polymorphic association to access the Active Storage Blob. The Active Storage Blob stores metadata about the image, which is used to retrieve it from the Storage System when required. Pi Marketplace uses Amazon Web Services (AWS) Simple Storage Service(S3).
 
 ### R19 - Provide your database schema design
+
+![Entity Relationship Diagram](pi-marketplace-erd.png)
 
 **Active Storage Attachments:**
 ```ruby
